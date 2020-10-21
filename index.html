@@ -25,6 +25,15 @@
 
         const mymap = L.map("ISSid").setView([0, 0], 1);
 
+        const ISSicon = L.icon({
+            iconUrl: 'iss200.png',
+            iconSize: [50, 32],
+            iconAnchor: [25, 16]
+
+        });
+
+        const marker = L.marker([0, 0], { icon: ISSicon}).addTo(mymap); 
+
         const attribution =  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
         const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
@@ -38,7 +47,8 @@
             const data = await response.json();
             const { latitude, longitude } = data;
 
-            L.marker([latitude, longitude]).addTo(mymap);
+            //L.marker([latitude, longitude]).addTo(mymap);
+            marker.setLatLng([latitude, longitude]);
 
             document.getElementById("lat").innerHTML = latitude;
             document.getElementById("lon").innerHTML = longitude;
